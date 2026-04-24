@@ -13,7 +13,10 @@ html{
 
 body{
     align-items: center;
-    background-image: url("Images/Night image.jpg");
+    background-image: url("../Images/Night image.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     font-family: 'Dosis', sans-serif;
     font-display: swap;

@@ -1,6 +1,6 @@
 let runningTotal = 0;
 let buffer = "0";
-let previousOperator;
+let previousOperator = null;
 //Selecting display
 const display = document.querySelector('.display');
 
@@ -80,13 +80,46 @@ function handleNumber(numberString){
     }
 }
 
+function handleKeydown(event){
+    const key = event.key;
+
+    if(/^\d$/.test(key)){
+        event.preventDefault();
+        buttonClick(key);
+        return;
+    }
+
+    const keyMap = {
+        '+': '+',
+        '-': '−',
+        '*': '×',
+        '/': '÷',
+        '=': '=',
+        'Enter': '=',
+        'Backspace': '←',
+        'Delete': 'C',
+        'Escape': 'C',
+        'c': 'C',
+        'C': 'C'
+    };
+
+    if(!keyMap[key]){
+        return;
+    }
+
+    event.preventDefault();
+    buttonClick(keyMap[key]);
+}
+
 function init(){
     document.querySelector('.CalButtons').addEventListener('click', function(event){
         //Only going to be triggered if a button is clicked
         if (event.target.tagName === 'BUTTON'){
             buttonClick(event.target.innerText);
         }
-    })
+    });
+
+    document.addEventListener('keydown', handleKeydown);
 }
 
 init();
